@@ -11,6 +11,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
     {
         static bool vazioChamado;
         static bool vazio;
+        static bool entradaValida;
         static void Main(string[] args)
         {
             List<Equipamento> listaEquipamentos = new List<Equipamento>();
@@ -28,7 +29,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
                     case "1":
                         Equipamento eq = new Equipamento();
                         eq.Registrar();
-                        listaEquipamentos.Add(eq);     
+                        listaEquipamentos.Add(eq);
                         break;
                     case "2":
                         MostrarListaEquipamentos(listaEquipamentos);
@@ -66,6 +67,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
             string opcao;
             do
             {
+                bool verificar;
                 int num_equip;
                 Console.Clear();
                 Console.WriteLine("\n                      Menu de chamados\n__________________________________________________________\n\n 1.   Registrar chamado\n 2.   Visualizar chamados\n 3.   Gerenciar Chamados\n 4.   Voltar\n__________________________________________________________\n");
@@ -78,13 +80,17 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
                         if (vazio == true)
                             break;
                         Console.WriteLine("Digite o número do item que deseja atribuir o chamado");
-                        int.TryParse(Console.ReadLine(), out num_equip);
+                        verificar = int.TryParse(Console.ReadLine(), out num_equip);
 
-                        string equip_nome = listaEquipamentos[num_equip].ChamarNome();
-                        Chamado cha = new Chamado();
+                        VerificarEntradas(listaEquipamentos, num_equip, verificar);
+                        if (entradaValida == true)
+                        {
+                            string equip_nome = listaEquipamentos[num_equip].ChamarNome();
+                            Chamado cha = new Chamado();
 
-                        cha.RegistrarChamado(ref equip_nome);
-                        listaChamados.Add(cha);                       
+                            cha.RegistrarChamado(ref equip_nome);
+                            listaChamados.Add(cha);   
+                        }                                           
                         break;
                     case "2":
                         MostrarListaChamados(listaChamados);
@@ -103,6 +109,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
         {
             int num_equip;
             string opcao;
+            bool verificar;
             do
             {
                 Console.Clear();
@@ -116,21 +123,50 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
                         if (vazioChamado == true)
                             break;
                         Console.WriteLine("\nDigite o número do equipamento que deseja alterar: ");
-                        int.TryParse(Console.ReadLine(), out num_equip);
-                        listaChamados[num_equip].EditarChamado();
+                        verificar = int.TryParse(Console.ReadLine(), out num_equip);
+
+                        VerificarEntradasChamado(listaChamados, num_equip, verificar);
+                        if (entradaValida == true)
+                            listaChamados[num_equip].EditarChamado();
                         break;
                     case "2":
                         MostrarListaEquipamentos(listaEquipamentos);
                         if (vazioChamado == true)
                             break;
                         Console.WriteLine("\nDigite o número do chamado que deseja excluir: ");
-                        int.TryParse(Console.ReadLine(), out num_equip);
-                        listaChamados.RemoveAt(num_equip);
+                        verificar = int.TryParse(Console.ReadLine(), out num_equip);
+
+                        VerificarEntradasChamado(listaChamados, num_equip, verificar);
+                        if (entradaValida == true)
+                            listaChamados.RemoveAt(num_equip);
                         break;
                     case "3": break;
                     default: Console.WriteLine("Input errado!"); Console.ReadLine(); Console.Clear(); break;
                 }
             } while (opcao != "3");
+        }
+
+        private static void VerificarEntradasChamado(List<Chamado> listaChamados, int num_equip, bool verificar)
+        {
+            if (verificar == false)
+            {
+                Console.WriteLine("Entrada inválida, use números...");
+                Console.ReadLine();
+                entradaValida = false;
+            }
+            else
+            {
+                if (num_equip >= listaChamados.Count || num_equip < 0)
+                {
+                    Console.WriteLine("Equipamento inválido...");
+                    Console.ReadLine();
+                    entradaValida = false;
+                }
+                else
+                {
+                    entradaValida = true;
+                }
+            }
         }
 
         private static void MostrarListaChamados(List<Chamado> listaChamados)
@@ -139,6 +175,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
             if (listaChamados.Count == 0)
             {
                 Console.WriteLine("Sem chamados registrados...");
+                Console.ReadLine();
                 vazioChamado = true;
             }
             else
@@ -160,6 +197,7 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
                 Console.Clear();
                 Console.WriteLine("\n                      Menu de edição\n__________________________________________________________\n\n 1.   Escolher item para editar\n 2.   Excluir item\n 3.   Voltar\n__________________________________________________________\n");
                 opcao = Console.ReadLine();
+                bool verificar;
                 int num_equip;
                 switch (opcao)
                 {
@@ -168,21 +206,50 @@ namespace Gestao_de_equipamentosOO.ConsoleApp
                         if (vazio == true)                       
                             break;                      
                         Console.WriteLine("\nDigite o número do equipamento que deseja alterar: ");
-                        int.TryParse(Console.ReadLine(), out num_equip);
-                        listaEquipamentos[num_equip].Editar(); 
+                        verificar = int.TryParse(Console.ReadLine(), out num_equip);
+
+                        VerificarEntradas(listaEquipamentos, num_equip, verificar);
+                        if (entradaValida == true)
+                            listaEquipamentos[num_equip].Editar(); 
                         break;
-                    case "2":                     
+                    case "2":
                         MostrarListaEquipamentos(listaEquipamentos);
                         if (vazio == true)
                             break;
                         Console.WriteLine("\nDigite o número do equipamento que deseja excluir: ");
-                        int.TryParse(Console.ReadLine(), out num_equip);
-                        listaEquipamentos.RemoveAt(num_equip);
+                        verificar = int.TryParse(Console.ReadLine(), out num_equip);
+
+                        VerificarEntradas(listaEquipamentos, num_equip, verificar);
+                        if (entradaValida == true)
+                            listaEquipamentos.RemoveAt(num_equip);
                         break;
                     case "3": break;
                     default: Console.WriteLine("Input errado!"); Console.ReadLine(); Console.Clear(); break;
                 }
             } while (opcao != "3");
+        }
+
+        private static void VerificarEntradas(List<Equipamento> listaEquipamentos, int num_equip, bool verificar)
+        {
+            if (verificar == false)
+            {
+                Console.WriteLine("Entrada inválida, use números...");
+                Console.ReadLine();
+                entradaValida = false;
+            }
+            else
+            {
+                if (num_equip >= listaEquipamentos.Count || num_equip < 0)
+                {
+                    Console.WriteLine("Equipamento inválido...");
+                    Console.ReadLine();
+                    entradaValida = false;
+                }
+                else
+                {
+                entradaValida = true;
+                }
+            }
         }
     }
 }
