@@ -1,0 +1,7 @@
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\obj\Debug\Gestao_de_equipamentosOO.ConsoleApp.csprojAssemblyReference.cache
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\obj\Debug\Gestao_de_equipamentosOO.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\bin\Debug\Gestao_de_equipamentosOO.ConsoleApp.exe.config
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\bin\Debug\Gestao_de_equipamentosOO.ConsoleApp.exe
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\bin\Debug\Gestao_de_equipamentosOO.ConsoleApp.pdb
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\obj\Debug\Gestao_de_equipamentosOO.ConsoleApp.exe
+C:\Users\Ivana\source\repos\Gestao_de_equipamentosOO\Gestao_de_equipamentosOO.ConsoleApp\obj\Debug\Gestao_de_equipamentosOO.ConsoleApp.pdb
